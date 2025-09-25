@@ -59,7 +59,7 @@ export function WaitlistSignup() {
             Join Totality Product Launch Waitlist.
           </h2>
           <p className="text-lg sm:text-xl mb-8 text-gray-300">
-            Experience the future of logistics today. Get early access to our revolutionary platform and transform how you or your business sends, receives & stores packages. Also, get a chance to explore our solar energy solutions.
+            Experience the future of logistics today. Get early access to our revolutionary platform and transform how you or your business sends, receives & stores packages. Also, get a chance to explore our clean energy solutions.
           </p>
 
           <div className="w-full">
