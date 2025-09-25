@@ -39,17 +39,7 @@ export default function Home() {
       <div className="content w-full">
         <WaitlistSignup />
       </div>
-      <Toaster
-        toastOptions={{
-          style: {
-            background: "rgb(23 23 23)",
-            color: "white",
-            border: "1px solid rgb(63 63 70)",
-          },
-          className: "rounded-xl",
-          duration: 5000,
-        }}
-      />
+      <Toaster />
     </main>
   )
 }
