@@ -6,7 +6,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Logistics, Storage & Solar Energy',
-  description: 'We offer efficient solutions for transportation, warehousing, and energy management, helping businesses optimize operations, reduce costs, and ensure reliability.',
+  description: 'We offer efficient solutions for transportation, warehousing, and energy management, helping businesses & individuals optimize operations, reduce costs, and ensure reliability.',
   }
 
 export default function RootLayout({
