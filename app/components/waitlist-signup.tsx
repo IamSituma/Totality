@@ -1,12 +1,17 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react"
-// backend removed; initial waitlist count remains local
-import { XIcon } from "./icons/x-icon"
-import { DiscordIcon } from "./icons/discord-icon"
-import { Avatar } from "./avatar"
-import { SocialIcon } from "./social-icon"
+import Image from "next/image"
 import { WaitlistForm } from "./waitlist-form"
+
+// Example avatars (replace with real images or URLs)
+const avatars = [
+  "/avatars/user1.jpg",
+  "/avatars/user2.jpg",
+  "/avatars/user3.jpg",
+  "/avatars/user4.jpg",
+  "/avatars/user5.jpg",
+]
 
 export function WaitlistSignup() {
   const [waitlistCount, setWaitlistCount] = useState(0)
@@ -15,14 +20,11 @@ export function WaitlistSignup() {
   const video1Ref = useRef<HTMLVideoElement>(null)
   const video2Ref = useRef<HTMLVideoElement>(null)
 
-  useEffect(() => {
-    // No backend — keep initial count at 0 or persisted client-side later
-  }, [])
-
   const handleSuccess = (count: number) => {
     setWaitlistCount(prev => prev + count)
   }
 
+  // switch videos every 10s
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideo(prev => (prev === 1 ? 2 : 1))
@@ -31,77 +33,96 @@ export function WaitlistSignup() {
   }, [])
 
   return (
-    <div className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-hidden">
+
+      {/* Background Videos */}
       <video
         ref={video1Ref}
         autoPlay
         loop
         muted
-        className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${currentVideo === 1 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${currentVideo === 1 ? "opacity-100" : "opacity-0"
+          }`}
       >
         <source src="/videos/background1.mp4" type="video/mp4" />
       </video>
+
       <video
         ref={video2Ref}
         autoPlay
         loop
         muted
-        className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${currentVideo === 2 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${currentVideo === 2 ? "opacity-100" : "opacity-0"
+          }`}
       >
         <source src="/videos/background2.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-0"></div>
+      {/* Gradient Overlay — black bottom to transparent top */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/100 via-black/75 to-transparent"></div>
 
-      <div className="relative z-10 w-full max-w-xl mx-auto p-8 flex flex-col justify-between flex-1">
-        <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 text-white">
-            Join Totality Launch Waitlist.
+      {/* Content Container */}
+      <div className="absolute inset-0 z-10 w-full h-full flex flex-col justify-end lg:flex-row lg:items-end lg:justify-between p-6 sm:p-8 lg:p-12">
+
+        {/* LEFT Text / LOGO */}
+        <div className="flex flex-col items-center lg:items-start lg:max-w-2xl space-y-4 sm:space-y-6 lg:space-y-6 text-center lg:text-left">
+
+          {/* Logo */}
+          <div className="w-36 sm:w-56 h-10 sm:h-14 relative">
+            <Image
+              src="/images/totality.png"
+              alt="Totality Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          {/* Headline */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-extrabold text-white leading-[1.1]">
+            Join Totality
+            <br />
+            <span className="text-[#9ACD32] whitespace-nowrap">
+              Product Waitlist.
+            </span>
           </h2>
-          <p className="text-lg sm:text-xl mb-8 text-gray-300">
-            Experience the future of logistics today. Get early access to our revolutionary platform and transform how you or your business sends, receives & stores packages. Also, get a chance to explore our clean energy solutions.
-          </p>
 
-          <div className="w-full">
-            <WaitlistForm onSuccess={handleSuccess} />
-          </div>
 
-          <div className="flex items-center justify-center mt-8">
-            <div className="flex -space-x-2 mr-4">
-              <Avatar initials="PK" index={0} />
-              <Avatar initials="SA" index={1} />
-              <Avatar initials="DD" index={2} />
-            </div>
-            <p className="text-white font-semibold">{waitlistCount}+ people on the waitlist</p>
-          </div>
+          {/* Description */}
+         {/* Description */}
+<p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300 leading-relaxed mt-1 sm:mt-2">
+  Experience the future of logistics today. Get early access to our
+  revolutionary platform and transform how you send, receive & store
+  packages. Also, explore our clean energy solutions.
+</p>
+
         </div>
 
-        <div className="pt-8 flex flex-col items-center space-y-4">
-          <div className="flex space-x-6">
-            <SocialIcon
-              href="https://x.com/@tootality"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X (formerly Twitter)"
-              icon={<XIcon className="w-6 h-6" />}
-            />
-            <SocialIcon
-              href="https://discord.gg/jyXs6EYM"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Discord"
-              icon={<DiscordIcon className="w-6 h-6" />}
-            />
-          </div>
+        {/* Form Container */}
+        <div className="w-full lg:w-auto max-w-md lg:max-w-2xl mt-4 lg:mt-0 flex flex-col items-center">
 
-          <div className="text-center mt-6">
-            <p className="text-l text-gray-300">For Partnerships</p>
-            <a
-              href="mailto:totalityops@proton.me"
-              className="text-white font-medium hover:underline"
-            >
-              totalityops@proton.me
-            </a>
+          <div className="bg-white/10 backdrop-blur-xl p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 shadow-xl sm:shadow-2xl space-y-4 sm:space-y-6 w-full flex flex-col items-center">
+
+            {/* Show avatars only if at least 1 person joined */}
+            {waitlistCount > 0 && (
+              <div className="flex items-center space-x-3 justify-center w-full">
+                <div className="flex -space-x-2 sm:-space-x-3">
+                  {avatars.map((src, index) => (
+                    <img
+                      key={index}
+                      src={src}
+                      alt={`User ${index + 1}`}
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white"
+                    />
+                  ))}
+                </div>
+                <div className="text-white font-bold text-sm sm:text-base">
+                  {waitlistCount}+
+                </div>
+              </div>
+            )}
+
+            {/* Form */}
+            <WaitlistForm onSuccess={handleSuccess} />
           </div>
         </div>
       </div>
