@@ -1,7 +1,7 @@
 "use client"
 
 import { WaitlistSignup } from "./components/waitlist-signup"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "../components/ui/toaster"
 
 const backgroundStyle = `
   .bg-pattern {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react"
-import { getWaitlistCount } from "../actions/waitlist"
+// backend removed; initial waitlist count remains local
 import { XIcon } from "./icons/x-icon"
 import { DiscordIcon } from "./icons/discord-icon"
 import { Avatar } from "./avatar"
@@ -16,7 +16,7 @@ export function WaitlistSignup() {
   const video2Ref = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    getWaitlistCount().then((count) => setWaitlistCount(count))
+    // No backend — keep initial count at 0 or persisted client-side later
   }, [])
 
   const handleSuccess = (count: number) => {
@@ -56,7 +56,7 @@ export function WaitlistSignup() {
       <div className="relative z-10 w-full max-w-xl mx-auto p-8 flex flex-col justify-between flex-1">
         <div className="flex-1 flex flex-col justify-center items-center text-center">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 text-white">
-            Join Totality Product Launch Waitlist.
+            Join Totality Launch Waitlist.
           </h2>
           <p className="text-lg sm:text-xl mb-8 text-gray-300">
             Experience the future of logistics today. Get early access to our revolutionary platform and transform how you or your business sends, receives & stores packages. Also, get a chance to explore our clean energy solutions.
